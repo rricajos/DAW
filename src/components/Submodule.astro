@@ -14,9 +14,7 @@ let submodules: Submodule[] = [];
 <!-- HTML de la página -->
 <ul id="submodule-list"></ul>
 
-<style>
 
-</style>
 <!-- Agregar el script de cliente -->
 <script>
     const submoduleList = document.getElementById('submodule-list');
@@ -77,6 +75,7 @@ let submodules: Submodule[] = [];
     fetchSubmodules().then((submodules) => {
         submodules.forEach(submodule => {
 					const listItem = document.createElement('li');
+
 listItem.className = "link-card";
 
 listItem.style.listStyle = "none";
@@ -138,6 +137,7 @@ listItem.innerHTML = `
     </a>
 `;
 
+            submoduleList.appendChild(listItem);
         });
     });
 
