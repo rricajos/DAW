@@ -1,0 +1,86 @@
+---
+// Definir la estructura para los submódulos
+interface Submodule {
+	title: string;
+	url: string;
+	href: string;
+}
+
+// Inicializar un arreglo vacío para los submódulos
+let submodules: Submodule[] = [];
+
+---
+
+<!-- HTML de la página -->
+<ul id="submodule-list"></ul>
+
+<!-- Agregar el script de cliente -->
+<script>
+    const submoduleList = document.getElementById('submodule-list');
+
+    async function fetchSubmodules() {
+        const response = await fetch('https://api.github.com/repos/rricajos/DAW/contents/.gitmodules');
+        const data = await response.json();
+
+        // Decodificar el contenido del archivo .gitmodules (está en base64)
+        const decodedContent = atob(data.content);
+
+        // Analizar el contenido del archivo .gitmodules para extraer los submódulos
+        const lines = decodedContent.split('\n');
+        let currentSubmodule = {
+					title: "",
+					url: ""
+				};
+
+        const submodules = [];
+
+        lines.forEach((line) => {
+            if (line.startsWith('[submodule')) {
+                // Guardar el submódulo anterior si existe
+                if (currentSubmodule.title && currentSubmodule.url) {
+                    submodules.push({
+                        title: currentSubmodule.title,
+                        url: currentSubmodule.url,
+                        href: currentSubmodule.url,
+                    });
+                }
+                // Reiniciar para un nuevo submódulo
+								 currentSubmodule = {
+									title: "",
+									url: ""
+								};
+            } else if (line.trim().startsWith('path')) {
+                const [, path] = line.split('=');
+                currentSubmodule.title = path.trim();
+            } else if (line.trim().startsWith('url')) {
+                const [, url] = line.split('=');
+                currentSubmodule.url = url.trim();
+            }
+        });
+
+        // Añadir el último submódulo
+        if (currentSubmodule.title && currentSubmodule.url) {
+            submodules.push({
+                title: currentSubmodule.title,
+                url: currentSubmodule.url,
+                href: currentSubmodule.url,
+            });
+        }
+
+        return submodules;
+    }
+
+    // Llamar a la función para obtener los submódulos y renderizarlos en la página
+    fetchSubmodules().then((submodules) => {
+        submodules.forEach(submodule => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <a href="${submodule.href}">
+                    <h2>${submodule.title} <span>&rarr;</span></h2>
+                    <p>${submodule.url}</p>
+                </a>
+            `;
+            submoduleList.appendChild(listItem);
+        });
+    });
+</script>
