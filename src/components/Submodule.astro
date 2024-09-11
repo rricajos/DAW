@@ -14,7 +14,9 @@ let submodules: Submodule[] = [];
 <!-- HTML de la página -->
 <ul id="submodule-list"></ul>
 
+<style>
 
+</style>
 <!-- Agregar el script de cliente -->
 <script>
     const submoduleList = document.getElementById('submodule-list');
@@ -74,15 +76,70 @@ let submodules: Submodule[] = [];
     // Llamar a la función para obtener los submódulos y renderizarlos en la página
     fetchSubmodules().then((submodules) => {
         submodules.forEach(submodule => {
-            const listItem = document.createElement('li');
-						listItem.className = "link-card";
-            listItem.innerHTML = `
-                <a href="${submodule.href}">
-                    <h2>${submodule.title} <span>&rarr;</span></h2>
-                    <p>${submodule.url}</p>
-                </a>
-            `;
-            submoduleList.appendChild(listItem);
+					const listItem = document.createElement('li');
+listItem.className = "link-card";
+
+listItem.style.listStyle = "none";
+listItem.style.display = "flex";
+listItem.style.padding = "1px";
+listItem.style.backgroundColor = "#23262d";
+listItem.style.backgroundImage = "none";
+listItem.style.backgroundSize = "400%";
+listItem.style.borderRadius = "7px";
+listItem.style.backgroundPosition = "100%";
+listItem.style.transition = "background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+listItem.style.boxShadow = "inset 0 0 0 1px rgba(255, 255, 255, 0.1)";
+
+// Estilos para el enlace dentro del <li>
+const styleLink = `
+  width: 100%;
+  text-decoration: none;
+  line-height: 1.4;
+  padding: calc(1.5rem - 1px);
+  border-radius: 8px;
+  color: white;
+  background-color: #23262d;
+  opacity: 0.8;
+`;
+
+// Estilos para el <h2> dentro del enlace
+const styleH2 = `
+  margin: 0;
+  font-size: 1.25rem;
+  transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+`;
+
+// Estilos para el <p> dentro del enlace
+const styleP = `
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+`;
+
+// Aplicar estilos a los elementos internos
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+  .link-card:hover,
+  .link-card:focus-within {
+    background-position: 0;
+    background-image: var(--accent-gradient);
+  }
+  
+  .link-card:hover h2,
+  .link-card:focus-within h2 {
+    color: rgb(var(--accent-light));
+  }
+`;
+document.head.appendChild(styleTag);
+
+listItem.innerHTML = `
+    <a href="${submodule.href}" style="${styleLink}">
+        <h2 style="${styleH2}">${submodule.title} <span>&rarr;</span></h2>
+        <p style="${styleP}">${submodule.url}</p>
+    </a>
+`;
+
         });
     });
+
+		
 </script>
