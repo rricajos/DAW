@@ -12,9 +12,16 @@ let submodules: Submodule[] = [];
 ---
 
 <!-- HTML de la página -->
-<ul id="submodule-list"></ul>
+<ul id="submodule-list" role="list" class="link-card-grid"></ul>
 
-
+<style>
+		.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
 <!-- Agregar el script de cliente -->
 <script>
     const submoduleList = document.getElementById('submodule-list');
