@@ -30,16 +30,12 @@ export function getSubmoduleBlobHash(path: string): string {
 
 
 export function getSubmoduleLastCommitSha(path: string): string {
-    try {
-        console.log(`Obteniendo SHA del último commit para el submódulo en el path: ${path}`);
-
-        // Obtener el SHA del último commit en el submódulo
-        const lastCommitSha = execSync(`git -C ${path} rev-parse HEAD`).toString().trim();
-        console.log(`Último commit SHA para ${path}: ${lastCommitSha}`);
-
-        return lastCommitSha;
-    } catch (error) {
-        console.error(`Error al obtener el SHA del último commit para el submódulo en ${path}:`, error);
-        return "N/A";
-    }
+  try {
+      // Obtener el SHA del último commit en el submódulo
+      const lastCommitSha = execSync(`git -C ${path} rev-parse HEAD`).toString().trim();
+      return lastCommitSha;
+  } catch (error) {
+      console.error(`Error al obtener el último commit SHA para el submódulo en ${path}:`, error);
+      return 'N/A';
+  }
 }

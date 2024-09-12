@@ -44,7 +44,7 @@ export async function fetchRepoData(): Promise<Submodule[]> {
       const result: unknown = await response.json();
 
       if (isGitHubRepo(result)) {
-       
+
         // Obtener el SHA del último commit desde GitHub
         const latestCommitSha = (await getRemoteRepoLastCommitSha(repoPath));
 
@@ -55,8 +55,8 @@ export async function fetchRepoData(): Promise<Submodule[]> {
           name: submodule.name.replace(/[_/-]/g, ' '),
           description: result.description,
           url: result.html_url,
-          currentBlob: currentCommitSha.slice(0,7),
-          latestBlob: latestCommitSha.slice(0,7),
+          currentBlob: currentCommitSha.slice(0, 7),
+          latestBlob: latestCommitSha.slice(0, 7),
         };
       } else {
         console.error(`Datos inesperados para ${submodule.name}:`, result);
