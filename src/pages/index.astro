@@ -57,7 +57,7 @@ const data = await fetchRepoData();
 				data.map((repo) => (
 					<Card
 						title={repo.name}
-						body={`Current Blob: ${repo.currentBlob} - Latest Blob: ${repo.latestBlob}`}
+						body={`Versión local: ${repo.currentBlob} - Versión remota: ${repo.latestBlob}`}
 						href={repo.url}
 					/>
 				))
