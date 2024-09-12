@@ -1,7 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import Submodule from '../components/Submodule.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+
+import { fetchRepoData } from "./github";
+
+
+const data = await fetchRepoData();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -36,42 +40,30 @@ import Submodule from '../components/Submodule.astro';
 		</svg>
 		<h1>CFGS DAW <span class="text-gradient">RRICAJOS</span></h1>
 		<p class="instructions">
-			La idea es tener una vista de pajaro del Ciclo Formativo 
-			de Grado Superior <code>CFGS</code> de Desarrollo 
-			de Aplicaciones Web <code>DAW</code>, es decir, 
-			quiero revisar los lenguajes de programación 
-			utilizados en cada Unidad Formativa <code>UF</code> rápidamente y tener un atajo web al repo.
+			La idea es tener una vista de pájaro del Ciclo Formativo de Grado Superior <code
+				>CFGS</code
+			> de Desarrollo de Aplicaciones Web <code>DAW</code>, es decir, quiero
+			revisar los lenguajes de programación utilizados en cada Unidad Formativa <code
+				>UF</code
+			> rápidamente y tener un atajo web al repo.
 			<br /><br />
-			
-			Las <code>UFs</code> estan en submodulos github, para actualizarlos ejecute el script <code>./update_submodules.sh</code>en una terminal UNIX.
+			Las <code>UFs</code> están en submódulos de GitHub, para actualizarlos ejecute
+			el script <code>./update_submodules.sh</code> en una terminal UNIX.
 			<br /><br />
 			<strong>Autor:</strong> Ricard Penin Honrubia @rricajos.
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentationsssssssss"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-			<Submodule />
+			{
+				data.map((repo) => (
+					<Card
+						title={repo.name}
+						body={`Current Blob: ${repo.currentBlob} - Latest Blob: ${repo.latestBlob}`}
+						href={repo.url}
+					/>
+				))
+			}
 		</ul>
 	</main>
-	
 </Layout>
 
 <style>
@@ -110,7 +102,10 @@ import Submodule from '../components/Submodule.astro';
 	.instructions {
 		margin-bottom: 2rem;
 		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		background: linear-gradient(
+			rgba(var(--accent-dark), 66%),
+			rgba(var(--accent-dark), 33%)
+		);
 		padding: 1.5rem;
 		border-radius: 8px;
 	}
@@ -131,5 +126,4 @@ import Submodule from '../components/Submodule.astro';
 		gap: 2rem;
 		padding: 0;
 	}
-
 </style>
