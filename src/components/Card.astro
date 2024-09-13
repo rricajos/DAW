@@ -44,22 +44,22 @@ const { bgcolor, text } = getStatusInfo(stat);
 <li class="link-card">
 	<a href={href}>
 		<h2 style={bgcolor} class="stat-tag">
-			{title}
+			{currentBlob} · {text}
 		</h2>
 		<!-- <p id="description">
 			{description} -->
 			<!-- <span>&rarr;</span> -->
 		<!-- </p> -->
-		<p>
-			{currentBlob} · {text}
-		</p>
+		<h2>
+			{title}
+		</h2>
 	
 	</a>
 </li>
 
 <style>
 	#description {
-		margin-top: 1.5rem;
+		margin-top: 2rem;
 	}
 	.stat-tag {
 		position: absolute;
