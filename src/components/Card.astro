@@ -2,14 +2,15 @@
 // Importa los tipos de Astro para las propiedades del componente
 interface Props {
 	title: string;
-	body: string;
+	currentBlob: string;
+	lastBlob: string;
 	description: string;
 	href: string;
 	stat: string;
 }
 
 // Extrae las propiedades del componente Astro
-const { href, title, description, body, stat } = Astro.props;
+const { href, title, description, currentBlob, lastBlob, stat } = Astro.props;
 console.log(stat);
 
 // Determina el estado del card basado en la propiedad 'stat'
@@ -45,12 +46,12 @@ const { bgcolor, text } = getStatusInfo(stat);
 		<h2 style={bgcolor} class="stat-tag">
 			{title}
 		</h2>
-		<p id="description">
-			{description}
+		<!-- <p id="description">
+			{description} -->
 			<!-- <span>&rarr;</span> -->
-		</p>
+		<!-- </p> -->
 		<p>
-			{text}
+			{currentBlob} · {text}
 		</p>
 	
 	</a>

@@ -61,7 +61,9 @@ const data = await fetchRepoData();
 					<Card
 						title={repo.name}
 						description={repo.description}
-						body={`Versión local: ${repo.currentBlob} - Versión remota: ${repo.latestBlob}`}
+						currentBlob={repo.currentBlob}
+						lastBlob={repo.latestBlob}
+				
 						href={repo.url}
 						stat={repo.stat}
 					/>
