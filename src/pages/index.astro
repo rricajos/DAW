@@ -62,6 +62,7 @@ const data = await fetchRepoData();
 						title={repo.name}
 						body={`Versión local: ${repo.currentBlob} - Versión remota: ${repo.latestBlob}`}
 						href={repo.url}
+						stat={repo.stat}
 					/>
 				))
 			}

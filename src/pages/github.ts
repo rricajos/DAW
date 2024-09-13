@@ -50,13 +50,14 @@ export async function fetchRepoData(): Promise<Submodule[]> {
 
         // Obtener el SHA del último commit en el submódulo local
         const currentCommitSha = getSubmoduleLastCommitSha(submodule.path); // Asegúrate de usar el path local del submódulo
-        console.log("================> " + submodule.path)
+      
         return {
           name: submodule.name.replace(/[_/-]/g, ' '),
           description: result.description,
           url: result.html_url,
           currentBlob: currentCommitSha.slice(0, 7),
           latestBlob: latestCommitSha.slice(0, 7),
+          stat: submodule.stat
         };
       } else {
         console.error(`Datos inesperados para ${submodule.name}:`, result);
