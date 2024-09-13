@@ -8,7 +8,15 @@ const total = Object.values(languages).reduce((acc, value) => acc + value, 0);
 <div class="horizontal-bar">
   {
     Object.entries(languages).map(([language, value]) => {
-      
+    
+      const getReadableSize = (value: number): string => {
+        if (value >= 1024 ** 4) return Math.floor(value / 1024 ** 4) + " TB"; // Terabytes
+        if (value >= 1024 ** 3) return Math.floor(value / 1024 ** 3) + " GB"; // Gigabytes
+        if (value >= 1024 ** 2) return Math.floor(value / 1024 ** 2) + " MB"; // Megabytes
+        if (value >= 1024) return Math.floor(value / 1024) + " KB"; // Kilobytes
+        return value + " Bytes"; // Bytes
+      };
+
       const flexGrow = (value / total).toFixed(2); // Calcula el valor para flex-grow
       const fgrow = parseFloat(flexGrow); // Convertimos la cadena a número
       const color = getLanguageColor(language);
@@ -17,11 +25,8 @@ const total = Object.values(languages).reduce((acc, value) => acc + value, 0);
           class="bar-segment"
           style={`flex-grow: ${flexGrow}; background-color: ${color}`}
         >
-          <span
-            class="bar-text"
-            style={`color:white`}
-          >
-            {language} <!-- - {(fgrow * 100).toFixed(2)}% -->
+          <span class="bar-text" style={`color:white`}>
+            {language} · {getReadableSize(value)}
           </span>
         </div>
       );
@@ -44,11 +49,9 @@ const total = Object.values(languages).reduce((acc, value) => acc + value, 0);
     justify-content: flex-start;
     white-space: nowrap;
     text-align: left;
-   
-  
+
     overflow: hidden;
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-
   }
 
   .bar-text {
