@@ -54,8 +54,9 @@ const { bgcolor, text } = getStatusInfo(stat);
 			{title}
 		</h2>
 		<span class="stat-tag">
-			<button> <div style={bgcolor} class="dot"></div>{currentBlob} </button>
-			<p>{text}</p>
+			<button> {currentBlob} </button>
+			<button> <div style={bgcolor} class="dot"></div><div>{text}</div> </button>
+		
 	
 		</span>
 		<div id="languages">
@@ -66,9 +67,8 @@ const { bgcolor, text } = getStatusInfo(stat);
 
 <style>
 	.dot {
-		position: absolute;
-		left: 8px;
-		top: 8px;
+		position: relative;
+	
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
@@ -86,6 +86,10 @@ const { bgcolor, text } = getStatusInfo(stat);
 	}
 	button {
 		position: relative;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 8px;
 		background-color: #17191e;
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 		padding: 0.5rem 1rem 0.5rem 32px;
