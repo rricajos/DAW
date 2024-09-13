@@ -7,6 +7,22 @@ interface Props {
 }
 
 const { href, title, body, stat } = Astro.props;
+
+const status = () => {
+	switch (stat) {
+		case "-":
+			return "Desactualizado.";
+
+		case "+":
+			return "Commits no registrados.";
+
+		case "U":
+			return "Conflictos de Union/Merge";
+
+		default: // case " "
+			return "Actualizado";
+	}
+};
 ---
 
 <li class="link-card">
@@ -18,13 +34,21 @@ const { href, title, body, stat } = Astro.props;
 		<p>
 			{body}
 		</p>
-		<p>
-			{stat}
-		</p>
+		<span class="status-card">
+			{status}
+		</span>
 	</a>
 </li>
 <style>
+	.status-card {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: #17191e;
+		border-radius: 0 1em 0 0;
+	}
 	.link-card {
+		position: relative;
 		list-style: none;
 		display: flex;
 		padding: 1px;
