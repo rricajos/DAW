@@ -43,14 +43,14 @@ const { bgcolor, text } = getStatusInfo(stat);
 
 <li class="link-card">
 	<a href={href}>
-		<h2 style={bgcolor} class="stat-tag">
+		<span style={bgcolor} class="stat-tag">
 			{currentBlob} · {text}
-		</h2>
+		</span>
 		<!-- <p id="description">
 			{description} -->
 			<!-- <span>&rarr;</span> -->
 		<!-- </p> -->
-		<h2>
+		<h2 id="body">
 			{title}
 		</h2>
 	
@@ -58,7 +58,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 </li>
 
 <style>
-	#description {
+	#body {
 		margin-top: 2rem;
 	}
 	.stat-tag {
