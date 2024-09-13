@@ -1,4 +1,5 @@
 ---
+// Importa los tipos de Astro para las propiedades del componente
 interface Props {
 	title: string;
 	body: string;
@@ -6,31 +7,36 @@ interface Props {
 	stat: string;
 }
 
+// Extrae las propiedades del componente Astro
 const { href, title, body, stat } = Astro.props;
+console.log(stat);
 
-const statusCard = document.getElementById("statusCard");
-const status = () => {
-	if (statusCard) {
-		switch (stat) {
-			case "-":
-				statusCard.className = "outdated";
-				return "Desactualizado";
-
-			case "+":
-				statusCard.className = "conflicted";
-
-				return "Commits no registrados";
-
-			case "U":
-				statusCard.className = "conflicted";
-				return "Conflictos de Union/Merge";
-
-			default: // case " "
-				statusCard.className = "updated";
-				return "Actualizado";
-		}
+// Determina el estado del card basado en la propiedad 'stat'
+const getStatusInfo = (stat: string) => {
+	switch (stat) {
+		case "-":
+			return { bgcolor: "background-color: #3f4000;", text: "Desactualizado" };
+		case "+":
+			return {
+				bgcolor: "background-color: #500000;",
+				text: "Commits no registrados",
+			};
+		case "U":
+			return {
+				bgcolor: "background-color: #500000;",
+				text: "Conflictos de Union/Merge",
+			};
+		case "":
+			return { bgcolor: "background-color: #005000;", text: "Actualizado" };
+		default:
+			return {
+				bgcolor: "background-color: #17191e;",
+				text: "Estado Desconocido",
+			};
 	}
 };
+
+const { bgcolor, text } = getStatusInfo(stat);
 ---
 
 <li class="link-card">
@@ -42,11 +48,12 @@ const status = () => {
 		<p>
 			{body}
 		</p>
-		<span id="status-card">
-			{status}
+		<span style={bgcolor} class="stat-tag">
+			{text}
 		</span>
 	</a>
 </li>
+
 <style>
 	.updated {
 		background-color: #005000;
@@ -57,7 +64,7 @@ const status = () => {
 	.conflicted {
 		background-color: #500000;
 	}
-	#status-card {
+	.stat-tag {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -67,7 +74,7 @@ const status = () => {
 		border-radius: 0 0 7px 0;
 		padding: 0.5rem calc(1.5rem - 1px);
 
-		font-size: 0.75rem;
+		font-size: 1rem;
 	}
 	.link-card {
 		position: relative;

@@ -34,7 +34,7 @@ export function getSubmoduleLastCommitSha(submodulePath: string): string {
     try {
       // Usar el comando `git submodule status` para obtener el estado del submódulo
       const submoduleStatus = execSync(`git submodule status ${submodulePath}`).toString().trim();
-      
+      console.log(submoduleStatus)
       // Extraer el SHA, eliminando cualquier símbolo antes del SHA
       const lastCommitSha = submoduleStatus.split(' ')[0].replace(/[-+U]/, '');
   
