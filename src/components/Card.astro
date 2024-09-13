@@ -8,19 +8,27 @@ interface Props {
 
 const { href, title, body, stat } = Astro.props;
 
+const statusCard = document.getElementById("statusCard");
 const status = () => {
-	switch (stat) {
-		case "-":
-			return "Desactualizado.";
+	if (statusCard) {
+		switch (stat) {
+			case "-":
+				statusCard.className = "outdated";
+				return "Desactualizado";
 
-		case "+":
-			return "Commits no registrados.";
+			case "+":
+				statusCard.className = "conflicted";
 
-		case "U":
-			return "Conflictos de Union/Merge";
+				return "Commits no registrados";
 
-		default: // case " "
-			return "Actualizado";
+			case "U":
+				statusCard.className = "conflicted";
+				return "Conflictos de Union/Merge";
+
+			default: // case " "
+				statusCard.className = "updated";
+				return "Actualizado";
+		}
 	}
 };
 ---
@@ -34,13 +42,22 @@ const status = () => {
 		<p>
 			{body}
 		</p>
-		<span class="status-card">
+		<span id="status-card">
 			{status}
 		</span>
 	</a>
 </li>
 <style>
-	.status-card {
+	.updated {
+		background-color: #005000;
+	}
+	.outdated {
+		background-color: #3f4000;
+	}
+	.conflicted {
+		background-color: #500000;
+	}
+	#status-card {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -49,6 +66,8 @@ const status = () => {
 
 		border-radius: 0 0 7px 0;
 		padding: 0.5rem calc(1.5rem - 1px);
+
+		font-size: 0.75rem;
 	}
 	.link-card {
 		position: relative;
@@ -62,6 +81,7 @@ const status = () => {
 		background-position: 100%;
 		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+		overflow: hidden;
 	}
 	.link-card > a {
 		width: 100%;
