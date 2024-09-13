@@ -20,22 +20,22 @@ console.log(stat);
 const getStatusInfo = (stat: string) => {
 	switch (stat) {
 		case "-":
-			return { bgcolor: "background-color: #3f4000;", text: "Desactualizado" };
+			return { bgcolor: "background-color: #fbff00;", text: "Desactualizado" };
 		case "+":
 			return {
-				bgcolor: "background-color: #500000;",
+				bgcolor: "background-color: #ff0000;",
 				text: "Commits no registrados",
 			};
 		case "U":
 			return {
-				bgcolor: "background-color: #500000;",
+				bgcolor: "background-color: #ff0000;",
 				text: "Conflictos de Union/Merge",
 			};
 		case "":
-			return { bgcolor: "background-color: #005000;", text: "Actualizado" };
+			return { bgcolor: "background-color: #00ff00;", text: "Actualizado" };
 		default:
 			return {
-				bgcolor: "background-color: #17191e;",
+				bgcolor: "background-color: #fff;",
 				text: "Estado unkown",
 			};
 	}
@@ -69,9 +69,10 @@ const { bgcolor, text } = getStatusInfo(stat);
 		position: absolute;
 		left: 8px;
 		top: 8px;
-		width: 16px;
-		height: 16px;
+		width: 8px;
+		height: 8px;
 		border-radius: 50%;
+	
 		
 	}
 	#languages {
@@ -84,6 +85,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 		text-align: center;
 	}
 	button {
+		position: relative;
 		background-color: #17191e;
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 		padding: 0.5rem 1rem 0.5rem 32px;
