@@ -46,6 +46,7 @@ export async function fetchRepoData(): Promise<Submodule[]> {
       if (isGitHubRepo(result)) {
 
         // Obtener el SHA del último commit desde GitHub
+        // fetch a `https://api.github.com/repos/${repoPath}/commits/main`;
         const latestCommitSha = (await getRemoteRepoLastCommitSha(repoPath));
 
         // Obtener el SHA del último commit en el submódulo local

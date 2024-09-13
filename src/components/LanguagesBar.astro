@@ -1,0 +1,60 @@
+---
+import { fetchRepoLanguages, getLanguageColor } from "../utils/githubApi";
+
+const languages = await fetchRepoLanguages();
+const total = Object.values(languages).reduce((acc, value) => acc + value, 0);
+---
+
+<div class="horizontal-bar">
+  {
+    Object.entries(languages).map(([language, value]) => {
+      
+      const flexGrow = (value / total).toFixed(2); // Calcula el valor para flex-grow
+      const fgrow = parseFloat(flexGrow); // Convertimos la cadena a número
+      const color = getLanguageColor(language);
+      return (
+        <div
+          class="bar-segment"
+          style={`flex-grow: ${flexGrow}; background-color: ${color}`}
+        >
+          <span
+            class="bar-text"
+            style={`color: ${fgrow < 0.1 ? "black" : "white"}`}
+          >
+            {language} <!-- - {(fgrow * 100).toFixed(2)}% -->
+          </span>
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .horizontal-bar {
+    display: flex;
+    width: 100%;
+
+    border-radius: 0 0 7px 7px;
+    overflow: hidden;
+  }
+
+  .bar-segment {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    text-align: left;
+   
+  
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  }
+
+  .bar-text {
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 0.05rem calc(1.5rem - 1px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+</style>
