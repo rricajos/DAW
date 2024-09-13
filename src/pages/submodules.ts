@@ -10,7 +10,9 @@ export interface Submodule {
   description: string;
   url: string;
   currentBlob: string;
+
   latestBlob: string;
+
   stat: string;
 }
 

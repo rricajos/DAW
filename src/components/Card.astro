@@ -4,7 +4,9 @@ import LanguagesBar from "../components/LanguagesBar.astro";
 interface Props {
 	title: string;
 	currentBlob: string;
+
 	lastBlob: string;
+
 	description: string;
 	href: string;
 	stat: string;
@@ -34,7 +36,7 @@ const getStatusInfo = (stat: string) => {
 		default:
 			return {
 				bgcolor: "background-color: #17191e;",
-				text: "Estado Desconocido",
+				text: "Estado unkown",
 			};
 	}
 };
@@ -44,9 +46,6 @@ const { bgcolor, text } = getStatusInfo(stat);
 
 <li class="link-card">
 	<a href={href}>
-		<span style={bgcolor} class="stat-tag">
-			{currentBlob} · {text}
-		</span>
 		<!-- <p id="description">
 			{description} -->
 		<!-- <span>&rarr;</span> -->
@@ -54,7 +53,11 @@ const { bgcolor, text } = getStatusInfo(stat);
 		<h2 id="body">
 			{title}
 		</h2>
+		<span class="stat-tag">
+			<button> <span style={bgcolor} class="dot"></span>{currentBlob} </button>
+			<p>{text}</p>
 	
+		</span>
 		<div id="languages">
 			<LanguagesBar />
 		</div>
@@ -62,27 +65,40 @@ const { bgcolor, text } = getStatusInfo(stat);
 </li>
 
 <style>
+	.dot {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		
+	}
 	#languages {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		width: 100%;
 	}
-	#body {
-		margin: 1rem 0;
+	p {
+		text-align: center;
 	}
-	.stat-tag {
-		z-index: 100;
-		position: absolute;
-		top: 0;
-		left: 0;
+	button {
 		background-color: #17191e;
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+		padding: 0.5rem 1rem;
+		color: white;
+		cursor: pointer;
+		border: none;
+		font-size: 1rem;
+		border-radius: 1rem;
+	}
+	.stat-tag {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 8px;
+		width: auto;
 
-		border-radius: 0 0 7px 0;
-		padding: 0.25rem calc(1.5rem - 1px);
 
-		font-size: 0.85rem;
+		font-size: 1rem;
 	}
 	.link-card {
 		position: relative;
@@ -109,14 +125,12 @@ const { bgcolor, text } = getStatusInfo(stat);
 		opacity: 0.8;
 	}
 	h2 {
+		text-align: left;
 		margin: 0;
 		font-size: 1.25rem;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
-	p {
-		margin: 0.5rem 0 1rem 0;
 
-	}
 	.link-card:is(:hover, :focus-within) {
 		background-position: 0;
 		background-image: var(--accent-gradient);

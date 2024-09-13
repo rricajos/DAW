@@ -8,6 +8,7 @@ interface GitHubRepo {
   description: string;
   html_url: string;
   latestBlob: string;
+
 }
 
 function isGitHubRepo(obj: any): obj is GitHubRepo {
