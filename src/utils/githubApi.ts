@@ -13,9 +13,9 @@ export const fetchRepoLanguages = async (): Promise<Record<string, number>> => {
 
 export const getLanguageColor = (language: string): string => {
   const languageColors: Record<string, string> = {
-    HTML: '#3f4000',       // Oscuro verdoso-amarillo
+    HTML: '#500000',       // Rojo oscuro
     CSS: '#264de4',        // Azul oscuro
-    JavaScript: '#500000',  // Rojo oscuro
+    JavaScript: '#3f4000',  // Oscuro verdoso-amarillo
     Python: '#003b4d',     // Azul muy oscuro
     Ruby: '#500f0f',       // Rojo burdeos oscuro
     Java: '#2e2b00',       // Marrón oscuro
