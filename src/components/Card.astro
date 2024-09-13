@@ -54,7 +54,8 @@ const { bgcolor, text } = getStatusInfo(stat);
 			{title}
 		</h2>
 		<span class="stat-tag">
-			<button> <div>&#10063;</div> {currentBlob} </button>
+			<!-- &#10063; -->
+			<button> <div>&#9986;</div> {currentBlob} </button>
 			<button> <div style={bgcolor} class="dot"></div><div>{text}</div> </button>
 		
 	
@@ -105,7 +106,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 		align-items: center;
 		gap: 8px;
 		width: auto;
-
+		margin: 0.5rem 0;
 
 		font-size: 1rem;
 	}
@@ -127,7 +128,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 		width: 100%;
 		text-decoration: none;
 		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
+		padding: 0.5rem calc(1.5rem - 1px) 1.5rem calc(1.5rem - 1px);
 		border-radius: 8px;
 		color: white;
 		background-color: #23262d;
