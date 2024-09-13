@@ -38,8 +38,8 @@ export function getSubmoduleLastCommitSha(path: string): string {
         const submoduleStatus = execSync(`git submodule status ${path}`).toString().trim();
 
         // El SHA está en la primera parte de la salida del comando
-        const lastCommitSha = submoduleStatus.split(' ')[0];
-        
+        const lastCommitSha = submoduleStatus.split(' ')[0].slice(0,8);
+
         return lastCommitSha;
     } catch (error) {
         console.error(`Error al obtener el último commit SHA para el submódulo en ${path}:`, error);
