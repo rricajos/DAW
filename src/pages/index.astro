@@ -60,6 +60,7 @@ const data = await fetchRepoData();
 			{
 				data.map((repo) => (
 					<Card
+						namespace={repo.namespace}
 						title={repo.name}
 						description={repo.description}
 						currentBlob={repo.currentBlob}
