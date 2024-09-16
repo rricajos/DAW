@@ -24,6 +24,7 @@ export function parseSubmodules(): Submodule[] {
 
   while ((match = submoduleRegex.exec(data)) !== null) {
     const description = '';
+    const namespace = match[1];
     const name = match[1];
     const path: string = match[2]; // Aquí obtenemos el path local
     const url = match[3].replace(/\.git$/, '');
@@ -32,7 +33,6 @@ export function parseSubmodules(): Submodule[] {
       console.error('Error: El path del submódulo no es válido');
       continue;
     }
-    const namespace = match[1];
     const statusOutput = execSync(`git submodule status ${path}`).toString().trim();
 
     // Dividimos la salida para extraer el estado (primer carácter) y el SHA
