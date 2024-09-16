@@ -56,7 +56,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 	
 			<button id="copyButton" data-repo-title={title} data-blob={currentBlob}>
 				<div>&#10063;</div>
-				<div>url.git</div>
+				<div>Hash: {currentBlob.slice(1,8)}</div>
 			</button>
 		</span>
 

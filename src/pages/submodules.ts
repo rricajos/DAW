@@ -10,13 +10,12 @@ export interface Submodule {
   description: string;
   url: string;
   currentBlob: string;
-
   latestBlob: string;
-
   stat: string;
 }
 
 export function parseSubmodules(): Submodule[] {
+
   const data = readFileSync(gitmodulesPath, 'utf-8');
   const submoduleRegex = /\[submodule\s*"([^"]+)"\]\s*path\s*=\s*([^\s]+)\s*url\s*=\s*(https:\/\/[^\s]+)/g;
   const submodules: Submodule[] = [];
@@ -39,9 +38,8 @@ export function parseSubmodules(): Submodule[] {
     const arr = statusOutput.split(' ');
 
     const stat = arr[0][0]; // Primer carácter que indica el estado del submódulo (-, +, U, espacio)
-    const currentBlob = arr[0].slice(1, 8); // SHA del commit (sin el primer carácter que indica el estado)
+    const currentBlob = arr[0].slice(1); // SHA del commit (sin el primer carácter que indica el estado)
 
-    // const currentBlob = arr ? arr[1].slice(0, 7) : 'N/A';
     const latestBlob = currentBlob; // Temporarily set to currentBlob; to be updated later
 
     submodules.push({

@@ -57,8 +57,8 @@ export async function fetchRepoData(): Promise<Submodule[]> {
           name: submodule.name.replace(/[_/-]/g, ' '),
           description: result.description,
           url: result.html_url,
-          currentBlob: currentCommitSha.slice(0, 7),
-          latestBlob: latestCommitSha.slice(0, 7),
+          currentBlob: currentCommitSha,
+          latestBlob: latestCommitSha,
           stat: submodule.stat
         };
       } else {
