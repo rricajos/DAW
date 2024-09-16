@@ -29,6 +29,7 @@ export function parseSubmodules(): Submodule[] {
     const path: string = match[2]; // Aquí obtenemos el path local
     const url = match[3].replace(/\.git$/, '');
 
+    
     if (typeof path !== 'string' || path.trim() === '') {
       console.error('Error: El path del submódulo no es válido');
       continue;

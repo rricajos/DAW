@@ -12,8 +12,9 @@ interface Props {
 }
 
 // Extrae las propiedades del componente Astro
-const { namespace, href, title, description, currentBlob, lastBlob, stat } = Astro.props;
-
+const { namespace, href, title, description, currentBlob, lastBlob, stat } =
+	Astro.props;
+console.log(href);
 // Determina el estado del card basado en la propiedad 'stat'
 const getStatusInfo = (stat: string) => {
 	switch (stat) {
@@ -54,7 +55,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 				<div>{text}</div>
 			</button>
 
-			<button id="copyButton" data-repo-title={namespace} data-blob={currentBlob}>
+			<button id="copyButton" data-repo-url={href} data-blob={currentBlob}>
 				<div>
 					<svg
 						fill="#fff"
@@ -93,8 +94,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 		if (button) {
 			button.addEventListener("click", () => {
 				const textToCopy =
-					"https://github.com/rricajos/" +
-					button.getAttribute("data-repo-title") +
+					button.getAttribute("data-repo-url") +
 					"/tree/" +
 					button.getAttribute("data-blob");
 
