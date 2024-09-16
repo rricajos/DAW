@@ -54,6 +54,7 @@ export async function fetchRepoData(): Promise<Submodule[]> {
         const currentCommitSha = getSubmoduleLastCommitSha(submodule.path); // Asegúrate de usar el path local del submódulo
       
         return {
+          namespace: submodule.name,
           name: submodule.name.replace(/[_/-]/g, ' '),
           description: result.description,
           url: result.html_url,

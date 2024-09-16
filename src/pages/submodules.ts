@@ -5,8 +5,9 @@ import { execSync } from 'child_process';
 const gitmodulesPath = join(process.cwd(), '.gitmodules');
 
 export interface Submodule {
-  path: string;
+  namespace: string;
   name: string;
+  path: string;
   description: string;
   url: string;
   currentBlob: string;
@@ -31,7 +32,7 @@ export function parseSubmodules(): Submodule[] {
       console.error('Error: El path del submódulo no es válido');
       continue;
     }
-
+    const namespace = name;
     const statusOutput = execSync(`git submodule status ${path}`).toString().trim();
 
     // Dividimos la salida para extraer el estado (primer carácter) y el SHA
@@ -43,6 +44,7 @@ export function parseSubmodules(): Submodule[] {
     const latestBlob = currentBlob; // Temporarily set to currentBlob; to be updated later
 
     submodules.push({
+      namespace,
       path,
       name, url, description, currentBlob, latestBlob,
       stat

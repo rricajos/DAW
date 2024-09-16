@@ -2,6 +2,7 @@
 import LanguagesBar from "../components/LanguagesBar.astro";
 
 interface Props {
+	namespace: string;
 	title: string;
 	currentBlob: string;
 	lastBlob: string;
@@ -11,7 +12,7 @@ interface Props {
 }
 
 // Extrae las propiedades del componente Astro
-const { href, title, description, currentBlob, lastBlob, stat } = Astro.props;
+const { namespace, href, title, description, currentBlob, lastBlob, stat } = Astro.props;
 
 // Determina el estado del card basado en la propiedad 'stat'
 const getStatusInfo = (stat: string) => {
@@ -53,7 +54,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 				<div>{text}</div>
 			</button>
 
-			<button id="copyButton" data-repo-title={title} data-blob={currentBlob}>
+			<button id="copyButton" data-repo-title={namespace} data-blob={currentBlob}>
 				<div>
 					<svg
 						fill="#fff"
