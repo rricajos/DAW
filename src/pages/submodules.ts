@@ -32,7 +32,7 @@ export function parseSubmodules(): Submodule[] {
       console.error('Error: El path del submódulo no es válido');
       continue;
     }
-    const namespace = name;
+    const namespace = match[1];
     const statusOutput = execSync(`git submodule status ${path}`).toString().trim();
 
     // Dividimos la salida para extraer el estado (primer carácter) y el SHA
