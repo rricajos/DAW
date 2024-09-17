@@ -24,13 +24,13 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 	<article>
 		<h2 id="body">
 			<div style="display: flex;"><StatusDot stat={stat} /></div>
-		
+
 			<span>{title}</span>
 		</h2>
 
 		<span class="stat-tag">
-			<button>
-				<div style="display: flex;"><ReloadIcon /></div>
+			<button id="statButton">
+				<div id="statButtonIcon" style="display: flex;"><ReloadIcon /></div>
 				<div><StatusText stat={stat} /></div>
 			</button>
 
@@ -59,11 +59,11 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 					"/tree/" +
 					button.getAttribute("data-blob");
 
-					let aux = buttonText.textContent;
-					buttonText.textContent = "Texto Copiado!";
-					setTimeout(() => {
-						buttonText.textContent = aux;
-					}, 2000);
+				let aux = buttonText.textContent;
+				buttonText.textContent = "Texto Copiado!";
+				setTimeout(() => {
+					buttonText.textContent = aux;
+				}, 2000);
 
 				if (textToCopy !== null) {
 					// Asegúrate de que `textToCopy` no sea null
@@ -75,9 +75,37 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 				}
 			});
 		}
+
+		const statButton = document.getElementById("statButton");
+		const statButtonIcon = document.getElementById("statButtonIcon");
+
+		if (statButton && statButtonIcon) {
+			statButton.addEventListener("click", () => {
+				// Añade la clase de rotación al ícono
+				statButtonIcon.classList.add("rotate");
+
+				// Opcional: Simula que el proceso termina después de 2 segundos, y detiene la animación
+				setTimeout(() => {
+					statButtonIcon.classList.remove("rotate");
+				}, 2000); // 2 segundos
+			});
+		}
 	});
 </script>
 <style>
+	@keyframes rotate {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(-360deg);
+		}
+	}
+
+	.rotate {
+		animation: rotate 1s linear infinite;
+	}
+
 	#languages-bar-container {
 		position: absolute;
 		bottom: 0;
@@ -156,7 +184,9 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 		background-position: 0;
 		background-image: var(--accent-gradient);
 	}
-	button:is(:hover, :focus-within) {
-		color: rgb(var(--accent-light));
+
+	
+	button:is(:hover, :active) > div {
+		color: white;
 	}
 </style>
