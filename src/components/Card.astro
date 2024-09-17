@@ -23,13 +23,14 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 <li class="link-card">
 	<article>
 		<h2 id="body">
-			<div><ReloadIcon /></div>
+			<div><StatusDot stat={stat} /></div>
+		
 			<span>{title}</span>
 		</h2>
 
 		<span class="stat-tag">
 			<button>
-				<div><StatusDot stat={stat} /></div>
+				<div><ReloadIcon /></div>
 				<div><StatusText stat={stat} /></div>
 			</button>
 
