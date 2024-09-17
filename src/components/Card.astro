@@ -152,11 +152,11 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
-	button:is(:hover, :focus-within) {
+	button:is(:hover, :active) {
 		background-position: 0;
 		background-image: var(--accent-gradient);
 	}
-	button:is(:hover, :focus-within) h2 {
+	button:is(:hover, :focus-within) {
 		color: rgb(var(--accent-light));
 	}
 </style>
