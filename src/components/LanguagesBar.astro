@@ -1,5 +1,5 @@
 ---
-import { fetchRepoLanguages, getLanguageColor } from "../utils/githubApi";
+import { fetchRepoLanguages, getLanguageColor } from "../utils/githubLang";
 
 const languages = await fetchRepoLanguages();
 const total = Object.values(languages).reduce((acc, value) => acc + value, 0);

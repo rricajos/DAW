@@ -1,0 +1,37 @@
+---
+interface Props {
+  stat: string;
+}
+
+// Extrae las propiedades del componente Astro
+const { stat } = Astro.props;
+
+// Determina el estado del card basado en la propiedad 'stat'
+const getStatusInfo = (stat: string) => {
+  switch (stat) {
+    case "-":
+      return { bgcolor: "background-color: #fbff00;" };
+    case "+":
+      return { bgcolor: "background-color: #ff0000;" };
+    case "U":
+      return { bgcolor: "background-color: #ff0000;" };
+    case "":
+      return { bgcolor: "background-color: #00ff00;" };
+    default:
+      return { bgcolor: "background-color: #fff;" };
+  }
+};
+
+const { bgcolor } = getStatusInfo(stat);
+---
+
+<div style={bgcolor} class="dot"></div>
+<style>
+  .dot {
+    position: relative;
+
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+</style>

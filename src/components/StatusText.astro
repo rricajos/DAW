@@ -1,0 +1,28 @@
+---
+interface Props {
+  stat: string;
+}
+
+// Extrae las propiedades del componente Astro
+const { stat } = Astro.props;
+
+// Determina el estado del card basado en la propiedad 'stat'
+const getStatusInfo = (stat: string) => {
+  switch (stat) {
+    case "-":
+      return { text: "Desactualizado" };
+    case "+":
+      return { text: "Commits no registrados" };
+    case "U":
+      return { text: "Conflictos de Union/Merge" };
+    case "":
+      return { text: "Actualizado" };
+    default:
+      return { text: "Estado Desconocido" };
+  }
+};
+
+const { text } = getStatusInfo(stat);
+---
+
+<span>{text}</span>

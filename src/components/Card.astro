@@ -1,5 +1,9 @@
 ---
 import LanguagesBar from "../components/LanguagesBar.astro";
+import CopyIcon from "../images/CopyIcon.astro";
+import ReloadIcon from "../images/ReloadIcon.astro";
+import StatusDot from "./StatusDot.astro";
+import StatusText from "./StatusText.astro";
 
 interface Props {
 	namespace: string;
@@ -14,75 +18,30 @@ interface Props {
 // Extrae las propiedades del componente Astro
 const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 	Astro.props;
-console.log(href);
-// Determina el estado del card basado en la propiedad 'stat'
-const getStatusInfo = (stat: string) => {
-	switch (stat) {
-		case "-":
-			return { bgcolor: "background-color: #fbff00;", text: "Desactualizado" };
-		case "+":
-			return {
-				bgcolor: "background-color: #ff0000;",
-				text: "Commits no registrados",
-			};
-		case "U":
-			return {
-				bgcolor: "background-color: #ff0000;",
-				text: "Conflictos de Union/Merge",
-			};
-		case "":
-			return { bgcolor: "background-color: #00ff00;", text: "Actualizado" };
-		default:
-			return {
-				bgcolor: "background-color: #fff;",
-				text: "Estado unkown",
-			};
-	}
-};
-
-const { bgcolor, text } = getStatusInfo(stat);
 ---
 
 <li class="link-card">
 	<article>
 		<h2 id="body">
-			<div style={bgcolor} class="dot"></div><span>{title}</span>
+			<div><ReloadIcon /></div>
+			<span>{title}</span>
 		</h2>
 
 		<span class="stat-tag">
 			<button>
-				<div style={bgcolor} class="dot"></div>
-				<div>{text}</div>
+				<div><StatusDot stat={stat} /></div>
+				<div><StatusText stat={stat} /></div>
 			</button>
 
 			<button id="copyButton" data-repo-url={href} data-blob={currentBlob}>
 				<div>
-					<svg
-						fill="#fff"
-						height="1rem"
-						width="1rem"
-						version="1.1"
-						id="Capa_1"
-						xmlns="http://www.w3.org/2000/svg"
-						xmlns:xlink="http://www.w3.org/1999/xlink"
-						viewBox="0 0 352.804 352.804"
-						xml:space="preserve"
-					>
-						<g>
-							<path
-								d="M318.54,57.282h-47.652V15c0-8.284-6.716-15-15-15H34.264c-8.284,0-15,6.716-15,15v265.522c0,8.284,6.716,15,15,15h47.651
-	 v42.281c0,8.284,6.716,15,15,15H318.54c8.284,0,15-6.716,15-15V72.282C333.54,63.998,326.824,57.282,318.54,57.282z
-		M49.264,265.522V30h191.623v27.282H96.916c-8.284,0-15,6.716-15,15v193.24H49.264z M303.54,322.804H111.916V87.282H303.54V322.804
-	 z"
-							></path>
-						</g>
-					</svg>
+					<CopyIcon />
 				</div>
-				<div>{currentBlob.slice(0, 5)}</div>
+				<div id="copyButtonText">{currentBlob.slice(0, 6)}.git</div>
 			</button>
 		</span>
 
-		<div id="languages">
+		<div id="languages-bar-container">
 			<LanguagesBar />
 		</div>
 	</article>
@@ -90,13 +49,20 @@ const { bgcolor, text } = getStatusInfo(stat);
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
 		const button = document.getElementById("copyButton");
+		const buttonText = document.getElementById("copyButtonText");
 
-		if (button) {
+		if (button && buttonText) {
 			button.addEventListener("click", () => {
 				const textToCopy =
 					button.getAttribute("data-repo-url") +
 					"/tree/" +
 					button.getAttribute("data-blob");
+
+					let aux = buttonText.textContent;
+					buttonText.textContent = "Texto Copiado!";
+					setTimeout(() => {
+						buttonText.textContent = aux;
+					}, 2000);
 
 				if (textToCopy !== null) {
 					// Asegúrate de que `textToCopy` no sea null
@@ -111,14 +77,7 @@ const { bgcolor, text } = getStatusInfo(stat);
 	});
 </script>
 <style>
-	.dot {
-		position: relative;
-		margin-top: 2px;
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-	}
-	#languages {
+	#languages-bar-container {
 		position: absolute;
 		bottom: 0;
 		left: 0;
