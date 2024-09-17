@@ -23,19 +23,19 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 <li class="link-card">
 	<article>
 		<h2 id="body">
-			<div><StatusDot stat={stat} /></div>
+			<div style="display: flex;"><StatusDot stat={stat} /></div>
 		
 			<span>{title}</span>
 		</h2>
 
 		<span class="stat-tag">
 			<button>
-				<div><ReloadIcon /></div>
+				<div style="display: flex;"><ReloadIcon /></div>
 				<div><StatusText stat={stat} /></div>
 			</button>
 
 			<button id="copyButton" data-repo-url={href} data-blob={currentBlob}>
-				<div>
+				<div style="display: flex;">
 					<CopyIcon />
 				</div>
 				<div id="copyButtonText">{currentBlob.slice(0, 6)}.git</div>
