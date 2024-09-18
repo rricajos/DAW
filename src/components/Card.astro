@@ -51,6 +51,8 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 	document.addEventListener("DOMContentLoaded", () => {
 		const button = document.getElementById("copyButton");
 		const buttonText = document.getElementById("copyButtonText");
+		const statButton = document.getElementById("statButton");
+		const statButtonIcon = document.getElementById("statButtonIcon");
 
 		if (button && buttonText) {
 			button.addEventListener("click", () => {
@@ -60,7 +62,7 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 					button.getAttribute("data-blob");
 
 				let aux = buttonText.textContent;
-				buttonText.textContent = "Texto Copiado!";
+				buttonText.textContent = "Copiado";
 				setTimeout(() => {
 					buttonText.textContent = aux;
 				}, 2000);
@@ -76,8 +78,6 @@ const { namespace, href, title, description, currentBlob, lastBlob, stat } =
 			});
 		}
 
-		const statButton = document.getElementById("statButton");
-		const statButtonIcon = document.getElementById("statButtonIcon");
 
 		if (statButton && statButtonIcon) {
 			statButton.addEventListener("click", () => {
