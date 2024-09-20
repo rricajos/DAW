@@ -4,8 +4,8 @@ export interface OnlineModule {
   path: string;
   blob: string;
   url: string;
-  size: number
   languages: object;
+  size: number
   stars: number;
   forks: number;
 }

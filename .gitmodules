@@ -1,3 +1,6 @@
 [submodule "M06_ENTORNO_CLIENTE/UF1"]
 	path = M06_ENTORNO_CLIENTE/UF1
 	url = https://github.com/rricajos/DAW_M06_UF1.git
+[submodule "M07_ENTORNO_SERVIDOR/UF1"]
+	path = M07_ENTORNO_SERVIDOR/UF1
+	url = https://github.com/rricajos/DAW_M07_UF1.git
